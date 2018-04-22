@@ -9,10 +9,10 @@ import os
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'AritcleSpider'
+BOT_NAME = 'articlespider'
 
-SPIDER_MODULES = ['AritcleSpider.spiders']
-NEWSPIDER_MODULE = 'AritcleSpider.spiders'
+SPIDER_MODULES = ['articlespider.spiders']
+NEWSPIDER_MODULE = 'articlespider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -71,9 +71,9 @@ file_path = os.path.abspath(os.path.dirname(__file__))
 IMAGES_STORE = os.path.join(file_path, "image")
 
 ITEM_PIPELINES = {
-   'AritcleSpider.pipelines.AritclespiderPipeline': 300,
-   'AritcleSpider.pipelines.ArticleImagePipeline': 1,
-   'AritcleSpider.pipelines.MySQLPipeline': 2,
+   'articlespider.pipelines.ArticlespiderPipeline': 300,
+   'articlespider.pipelines.ArticleImagePipeline': 1,
+   'articlespider.pipelines.MySQLPipeline': 2,
 
 }
 

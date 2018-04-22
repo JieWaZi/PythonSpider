@@ -9,7 +9,7 @@ import MySQLdb.cursors
 from twisted.enterprise import adbapi
 
 
-class AritclespiderPipeline(object):
+class ArticlespiderPipeline(object):
     def process_item(self, item, spider):
         return item
 

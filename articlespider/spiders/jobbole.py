@@ -3,6 +3,8 @@ import scrapy
 from scrapy.http import Request
 from urllib import parse
 
+from articlespider.items import ArticleItemLoader, ArticleItem
+
 
 class JobboleSpider(scrapy.Spider):
     name = 'jobbole'
