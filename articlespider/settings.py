@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-
-# Scrapy settings for articlespider project
+import os
+# Scrapy settings for AritcleSpider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,17 +9,17 @@
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'articlespider'
+BOT_NAME = 'AritcleSpider'
 
-SPIDER_MODULES = ['articlespider.spiders']
-NEWSPIDER_MODULE = 'articlespider.spiders'
+SPIDER_MODULES = ['AritcleSpider.spiders']
+NEWSPIDER_MODULE = 'AritcleSpider.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'articlespider (+http://www.yourdomain.com)'
+#USER_AGENT = 'AritcleSpider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+# ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -47,13 +47,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'articlespider.middlewares.ArticlespiderSpiderMiddleware': 543,
+#    'AritcleSpider.middlewares.AritclespiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'articlespider.middlewares.ArticlespiderDownloaderMiddleware': 543,
+#    'AritcleSpider.middlewares.AritclespiderDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -64,9 +64,18 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'articlespider.pipelines.ArticlespiderPipeline': 300,
-#}
+# 用来配置image_urls的来源
+IMAGES_URLS_FIELD = 'image_url'
+file_path = os.path.abspath(os.path.dirname(__file__))
+# 用来配置图片下载路径
+IMAGES_STORE = os.path.join(file_path, "image")
+
+ITEM_PIPELINES = {
+   'AritcleSpider.pipelines.AritclespiderPipeline': 300,
+   'AritcleSpider.pipelines.ArticleImagePipeline': 1,
+   'AritcleSpider.pipelines.MySQLPipeline': 2,
+
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +97,7 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+MYSQL_HOST = "127.0.0.1"
+MYSQL_DBNAME = "spider"
+MYSQL_USER = "root"
+MYSQL_PASSWORD = "0000"
